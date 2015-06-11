@@ -1,0 +1,30 @@
+<h3><a href="/messages/<%= @message.id %>"><%= @message.author %></a> : </h3>
+<p>
+  Created at: <%= @message.created_at %>
+</p>
+
+<p>
+  <%= @message.content  %>
+</p>
+
+<p>
+  <a href = "<%= @message.url %>"><%= @message.url %></a>
+</p>
+
+<hr/>
+
+<p>Other posts from this Author:</p>
+<% @other_messages.each do |message| %>
+  <div class="message">
+    <h3><%= message.author %>:</h3>
+    <small><p>Created at: <%= message.created_at %></p></small>
+    <p>
+      <%= message.content %>
+    </p>
+    <p>
+      <a href = "<%= message.url %>"><%= message.url %></a>
+    </p>
+  </div>
+<% end %>
+
+<a href="/messages">Back to All Messages</a>

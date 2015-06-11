@@ -1,0 +1,28 @@
+<% if @message && @message.errors.any? %>
+  <div>
+    <strong>Some issues with your message, please fix them:</strong>
+    <ul>
+      <% @message.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<form method="post" action="/messages">
+  <div>
+    <label>Author:</label>
+    <input type="text" name="author" value="<%= @message && @message.author %>">
+  </div>
+  <div>
+    <label>Content:</label>
+    <input type="text" name="content" value="<%= @message && @message.content %>">
+  </div>
+  <div>
+    <label>URL:</label>
+    <input type="text" name="url" value="<%= @message && @message.url %>">
+  </div>
+  <div>
+    <input type="submit" value="Submit">
+  </div>
+</form>
