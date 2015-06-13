@@ -32,7 +32,7 @@ body {
   width: 500px;
   height: 470px;
   background-color: gray;
-  float: right;
+  float: left;
   transform: rotate(180deg);
 }
 
