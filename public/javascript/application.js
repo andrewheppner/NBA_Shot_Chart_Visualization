@@ -18,6 +18,8 @@ $(document).ready(function() {
 
   var playersObject = {};
 
+
+
   //Listens for search queries, and will filter the contacts displaying on the page.
   $('#searchbox').keyup(function(){
     var valThis = $(this).val();
@@ -33,10 +35,7 @@ $(document).ready(function() {
     var x = raw_x + 250;
     var y = raw_y + 10
     var type_of_shot = data.action_type;
-    // var team = data.team_id;
-    var shot = ('<div title="' + type_of_shot + '"></div>');
-    // $(shot).data('team', team);
-    // console.log($(shot).data('team'));
+    var shot = ('<div title="' + type_of_shot + '&#13;' + playersObject[data.player_id].name + '"></div>');
     
     if(data.opponent_id != gamesObject[data.game_id].home) {
 
@@ -60,6 +59,7 @@ $(document).ready(function() {
   function createPlayersObject(data){
     playersObject[data.player_id] = { 'name': data.player_name, 'number': data.team_id };
   };
+
 
   function createTeamNameObject(data){
     teamsObject[data.team_id] = data.team_name; 
