@@ -1,4 +1,6 @@
-
+body {
+  margin: 30px;
+}
 
 
 .madeshot {
@@ -34,5 +36,10 @@
 }
 
 #shots {
-  float: left;
+  float: right;
+  margin-right: 300px;
+}
+
+#searchbox {
+  margin-bottom: 30px;
 }

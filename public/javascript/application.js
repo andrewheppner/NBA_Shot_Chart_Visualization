@@ -4,6 +4,8 @@ $(document).ready(function() {
 
   var url = 'https://probasketballapi.com/shotcharts/?api_key=' + api_key ;
 
+  var urlshot = 'https://probasketballapi.com/shotcharts/?api_key=' + api_key ;
+
   var url2 = 'https://probasketballapi.com/players/?api_key=' + api_key ;
 
   var url3 = 'https://probasketballapi.com/teams/?api_key=' + api_key ;
@@ -23,18 +25,18 @@ $(document).ready(function() {
     });
   });
   
-  function renderShotData(data) {
-      var raw_x = data.loc_x;
-      var raw_y = data.loc_y;
-      var x = raw_x + 250;
-      var y = raw_y + 10
-      var type_of_shot = data.action_type;
-      var shot = '<div title="' + type_of_shot + '"></div>';
-      if (data.shot_made === 1){
-      $('#shots').append($(shot).css({top: y, left: x}).addClass('madeshot'));
-      } else {
-      $('#shots').append($(shot).css({top: y, left: x}).addClass('missedshot'));
-      }  
+  function renderShotData(data) {   
+    var raw_x = data.loc_x;
+    var raw_y = data.loc_y;
+    var x = raw_x + 250;
+    var y = raw_y + 10
+    var type_of_shot = data.action_type;
+    var shot = '<div title="' + type_of_shot + '"></div>';
+    if (data.shot_made === 1){
+    $('#shots').append($(shot).css({top: y, left: x}).addClass('madeshot'));
+    } else {
+    $('#shots').append($(shot).css({top: y, left: x}).addClass('missedshot'));
+    }  
   };
 
   function createPlayersObject(data){
@@ -50,16 +52,18 @@ $(document).ready(function() {
       var away = data.away_id;
       var date = data.date;
       var season = data.season;
-      var game_id= data.game_id;
-      var gameDiv = $('#games').append('<div class="game">' + season + ' ' +  
+      var gameId = data.game_id;
+      var gameDiv = ('<div class="game">' + season + ' ' +  
         teamsObject[home] + ' vs. ' + teamsObject[away] + 
-         '</div>').data('gameId', game_id);
+         '</div>');
+      $(gameDiv).data('gameId', gameId).appendTo('#games');
   };
 
   
   //ON click of .game div, make ajax request to get shot Data
-    $('#games').on('click', '.game', function(e){
-      getShotChart($(e.target).data('gameId'));
+    $('#games').on('click', '.game', function(){
+      $('#shots').empty();
+      getShotChart($(this).data('gameId'));
     });
   
 
@@ -72,6 +76,10 @@ $(document).ready(function() {
       url: url + '&game_id=' + gameId + '&get_extra=1',
       method: 'post',
       dataType: 'JSON',
+      // data: {
+      //   game_id: gameId,
+      //   get_extra: 1
+      // },
       success: function(data){
         console.log(data);
         _.each(data, renderShotData);
