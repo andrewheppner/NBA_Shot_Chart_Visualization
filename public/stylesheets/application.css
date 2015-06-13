@@ -23,3 +23,16 @@
   height: 470px;
   background-color: gray;
 }
+
+#games {
+  float:left;
+  width: 25%;
+}
+
+.game:hover {
+  color: red;
+}
+
+#shots {
+  float: left;
+}
