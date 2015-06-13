@@ -19,11 +19,21 @@ body {
   border-radius: 50px;
 }
 
-#shots {
+#shots-home {
   position: relative;
   width: 500px;
   height: 470px;
   background-color: gray;
+  float:left;
+}
+
+#shots-away {
+  position: relative;
+  width: 500px;
+  height: 470px;
+  background-color: gray;
+  float: right;
+  transform: rotate(180deg);
 }
 
 #games {
@@ -33,11 +43,6 @@ body {
 
 .game:hover {
   color: red;
-}
-
-#shots {
-  float: right;
-  margin-right: 300px;
 }
 
 #searchbox {
